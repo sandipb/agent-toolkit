@@ -1,0 +1,35 @@
+[project]
+name = "skills-directory"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.5.1",
+]
+
+[tool.pymarkdown]
+plugins.md013 = {enabled = true, line_length = 120, code_blocks = false, tables = false, headings = false}
+# MD022: Disable blank lines around headings - skills use compact heading style
+plugins.md022.enabled = false
+# MD031: Disable blank lines around fenced code blocks - reference docs use compact formatting
+plugins.md031.enabled = false
+# MD032: Disable blank lines around lists - allow compact list formatting
+plugins.md032.enabled = false
+# MD033: Allow inline HTML - some docs may use HTML for formatting
+plugins.md033.enabled = false
+# MD040: Don't require language specifiers for code blocks - some examples are pseudo-code
+plugins.md040.enabled = false
+# MD041: Don't require first line to be H1 - YAML frontmatter comes first in SKILL.md
+plugins.md041.enabled = false
+# MD003: Allow mixed heading styles - YAML frontmatter uses different style than markdown body
+plugins.md003.enabled = false
+# MD023: Allow headings not at line start - YAML frontmatter formatting
+plugins.md023.enabled = false
+# MD026: Allow trailing punctuation in headings - questions are valid heading styles
+plugins.md026.enabled = false
+# MD034: Allow bare URLs - reference documentation includes many documentation links
+plugins.md034.enabled = false
