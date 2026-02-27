@@ -122,7 +122,7 @@ rate({app="nginx"}[5m])  # with step=1m for 1d, step=5m for 7d
 | Error | Cause | Fix |
 |-------|-------|-----|
 | 504 Gateway Timeout | Query too expensive | Narrow time range, add line filters, more specific selectors |
-| "max series" exceeded | Too many unique label combos (500 default) | Add selectors, reduce time, aggregate |
+| "max series" exceeded | Too many unique label combos (default 500) | Add selectors, reduce time range, aggregate |
 | "max entries" exceeded | Too many log lines (default 5000) | Add `limit`, narrow selectors/time |
 | "bytes read" limit | Scanning too much data | Narrow selectors, reduce time, add line filters early |
 | "chunks limit" exceeded | >2M chunks scanned | Narrow time range and selectors |

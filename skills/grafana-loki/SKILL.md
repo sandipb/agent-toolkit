@@ -1,13 +1,19 @@
 ---
 name: grafana-loki
 description: >
-  Use this skill when the user asks about Loki, LogQL, log queries, Grafana Loki configuration,
-  logcli, or runs "/grafana-loki". Handles querying logs via logcli or HTTP API, writing LogQL queries,
-  troubleshooting Loki queries, analyzing label cardinality, and Loki cluster configuration.
-  Triggers on: "loki", "logql", "logcli", "loki query", "log query", "grafana loki", "/grafana-loki".
-version: 1.0.0
+  Use this skill for any task involving Grafana Loki — writing or debugging LogQL queries,
+  running logcli commands, querying logs via Loki's HTTP API, investigating errors or performance
+  issues in logs stored in Loki, troubleshooting slow or timed-out Loki queries, cardinality
+  problems, and Loki cluster configuration. Always use this skill when the user wants to find,
+  filter, or analyze logs and the context implies Loki (e.g., they mention logcli, LogQL, a Loki
+  endpoint URL, or X-Scope-OrgID / tenant ID). Also use when the user asks about log streams,
+  label selectors like {app="..."} or {namespace="..."}, line filters, log parsers (json/logfmt),
+  or metric queries over logs (rate, count_over_time, quantile_over_time). Triggers on:
+  "/grafana-loki", "loki", "logql", "logcli", "log query", "query logs", "grafana loki",
+  "label cardinality", "log streams", "loki endpoint", "orgid", "X-Scope-OrgID".
+version: 1.1.0
 allowed-tools: >
-  Bash(logcli:*), Bash(curl:*), Bash(jq:*), Bash(python3:*), Bash(which:*), Bash(command:*),
+  Bash(logcli:*), Bash(curl:*), Bash(jq:*), Bash(python3:*), Bash(which:*),
   Bash(loki-query.sh:*), Read, Grep, WebFetch(domain:grafana.com)
 ---
 
@@ -36,29 +42,56 @@ Optionally:
 - Auth credentials (basic auth user/pass, bearer token)
 - CA cert path or TLS skip preference
 
-Set these as environment variables for the session:
-```bash
-export LOKI_ADDR="<endpoint>"
-export LOKI_ORG_ID="<tenant>"
-# Optional:
-export LOKI_USERNAME="<user>"
-export LOKI_PASSWORD="<pass>"
-```
-
 ## Tool Selection: logcli vs HTTP API
 
 ### Step 1: Detect logcli availability
 ```bash
-command -v logcli >/dev/null 2>&1 && echo "logcli available" || echo "logcli not found"
+which logcli >/dev/null 2>&1 && echo "logcli available" || echo "logcli not found"
 ```
 
 ### If logcli IS available (preferred)
-Use logcli directly. It handles auth, output formatting, and pagination:
+
+**CRITICAL: The Bash tool does not persist shell state across lines — `export` and
+multi-line variable assignments are not visible to logcli on subsequent lines.**
+
+Two patterns that reliably work:
+
+**Pattern 1 — Inline env vars (simple queries, one line):**
 ```bash
-logcli query --since=1h --limit=100 '{app="nginx"} |= "error"'
+LOKI_ADDR="<endpoint>" LOKI_ORG_ID="<tenant>" logcli query '{app="nginx"} |= "error"' --since=1h --limit=100 --no-labels
 ```
 
-Set env vars (`LOKI_ADDR`, `LOKI_ORG_ID`) and logcli reads them automatically.
+**Pattern 2 — per-tenant `.env` files (multi-tenant sessions or complex queries with `{{...}}` templates):**
+
+`/tmp/*.env` files **persist across Bash invocations**. Create them once at session start,
+reuse across all queries, and delete at the end. Use one file per tenant to prevent
+cross-contamination.
+
+```bash
+# Once at session start — create per-tenant env files
+printf 'LOKI_ADDR=<endpoint>\nLOKI_ORG_ID=<tenant-a>\n' > /tmp/loki-<tenant-a>.env
+printf 'LOKI_ADDR=<endpoint>\nLOKI_ORG_ID=<tenant-b>\n' > /tmp/loki-<tenant-b>.env
+
+# Each query sources the appropriate tenant file
+set -a && source /tmp/loki-<tenant-a>.env && set +a && logcli query '{app="nginx"} | json | line_format "{{.msg}}"' --since=1h --limit=100 --no-labels
+
+# Cleanup when investigation is done
+rm /tmp/loki-<tenant-a>.env /tmp/loki-<tenant-b>.env
+```
+
+The `.env` file pattern is also required when the query contains `{{...}}` template syntax
+(e.g., `line_format "{{.field}}"`) which cannot be combined with inline env var prefix
+due to shell parsing interactions.
+
+```bash
+# WRONG — export on separate lines, logcli can't see them
+export LOKI_ADDR="<endpoint>"
+logcli query ...
+
+# WRONG — \ line continuation after inline env vars causes "command not found"
+LOKI_ADDR="<endpoint>" \
+logcli query ...
+```
 
 ### If logcli is NOT available
 Use the wrapper script at `~/.claude/skills/grafana-loki/loki-query.sh`:
@@ -121,6 +154,25 @@ it just won't benefit from bloom acceleration. Never assume bloom filters are av
 {namespace="prod-us"}      # fast: index lookup
 {namespace=~"prod-.*"}     # slow: scans all values
 ```
+
+### 9. Querying nested JSON (e.g. Kubernetes audit logs with a `body` string field)
+
+When logs wrap the real content inside a stringified JSON field (e.g. `{"body": "{...}", ...}`),
+use a double `| json` pipeline. The second `| json` must have **no field arguments** — using
+`| json fieldname` after `line_format` does not extract fields reliably:
+
+```logql
+{cluster="prod"} |= "my-pod-name"
+  | json                           # parse outer JSON → extracts 'body' and other fields as labels
+  | line_format "{{.body}}"        # replace log line with the inner JSON string
+  | json                           # parse inner JSON → ALL fields become labels (no field args!)
+  | verb="delete"                  # filter on inner field
+  | objectRef_resource="pods"      # nested keys use _ separator: objectRef.resource → objectRef_resource
+  | line_format "{{.requestReceivedTimestamp}} user={{.user_username}} agent={{.userAgent}}"
+```
+
+Use `--no-labels` when running this pattern — the full `| json` extracts many labels and
+the output becomes very large without it.
 
 ## Workflow for User Queries
 

@@ -33,3 +33,5 @@ plugins.md023.enabled = false
 plugins.md026.enabled = false
 # MD034: Allow bare URLs - reference documentation includes many documentation links
 plugins.md034.enabled = false
+# MD024: Changelogs use identical section headings (Added, Changed, etc.) across version blocks
+plugins.md024 = {allow_different_nesting = true}
