@@ -11,7 +11,7 @@ description: >
   or metric queries over logs (rate, count_over_time, quantile_over_time). Triggers on:
   "/grafana-loki", "loki", "logql", "logcli", "log query", "query logs", "grafana loki",
   "label cardinality", "log streams", "loki endpoint", "orgid", "X-Scope-OrgID".
-version: 1.1.0
+version: 1.1.1
 allowed-tools: >
   Bash(logcli:*), Bash(curl:*), Bash(jq:*), Bash(python3:*), Bash(which:*),
   Bash(loki-query.sh:*), Read, Grep, WebFetch(domain:grafana.com)
@@ -23,12 +23,13 @@ You are a Loki expert. Help users query logs, write LogQL, configure Loki, and t
 
 ## Local References (read BEFORE making remote calls)
 
-These files contain distilled reference material. Read them first to answer queries without network calls:
+These files contain distilled reference material. Read them first to answer queries without network calls.
+Paths are relative to the directory containing this `SKILL.md` file, so the skill works with any agent:
 
-- `~/.claude/skills/grafana-loki/references/logql-reference.md` — Full LogQL syntax, operators, functions
-- `~/.claude/skills/grafana-loki/references/loki-api-reference.md` — All HTTP API endpoints, params, auth
-- `~/.claude/skills/grafana-loki/references/query-optimization.md` — Performance rules, anti-patterns, troubleshooting
-- `~/.claude/skills/grafana-loki/references/logcli-reference.md` — logcli commands, flags, env vars
+- `./references/logql-reference.md` — Full LogQL syntax, operators, functions
+- `./references/loki-api-reference.md` — All HTTP API endpoints, params, auth
+- `./references/query-optimization.md` — Performance rules, anti-patterns, troubleshooting
+- `./references/logcli-reference.md` — logcli commands, flags, env vars
 
 Only fetch from `https://grafana.com/docs/loki/latest/...` if the local references don't cover the user's question.
 
@@ -94,9 +95,9 @@ logcli query ...
 ```
 
 ### If logcli is NOT available
-Use the wrapper script at `~/.claude/skills/grafana-loki/loki-query.sh`:
+Use the wrapper script at `./loki-query.sh`:
 ```bash
-~/.claude/skills/grafana-loki/loki-query.sh query_range '{app="nginx"} |= "error"' --since 1h --limit 100
+./loki-query.sh query_range '{app="nginx"} |= "error"' --since 1h --limit 100
 ```
 
 Or fall back to direct curl:
@@ -127,7 +128,7 @@ Prevents accidentally pulling millions of lines.
 ```bash
 logcli stats '{app="nginx"}' --since=1h
 # or
-~/.claude/skills/grafana-loki/loki-query.sh stats '{app="nginx"}' --since 1h
+./loki-query.sh stats '{app="nginx"}' --since 1h
 ```
 If bytes/chunks are large, warn the user and suggest narrowing.
 
