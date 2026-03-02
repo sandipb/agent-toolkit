@@ -5,6 +5,14 @@ All notable changes to the grafana-loki skill will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2026-03-02
+
+### Changed
+- Local reference file paths and wrapper script path changed from Claude-specific absolute paths
+  (`~/.claude/skills/grafana-loki/...`) to skill-relative paths (`./references/...`, `./loki-query.sh`),
+  making the skill portable across different AI coding agents
+- Added portability note clarifying that local file paths are relative to the directory containing `SKILL.md`
+
 ## [1.1.0] - 2026-02-25
 
 ### Added
