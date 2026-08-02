@@ -1,0 +1,20 @@
+{
+  "name": "sandipb-ai",
+  "interface": {
+    "displayName": "sandipb.ai"
+  },
+  "plugins": [
+    {
+      "name": "sandipb-ai",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex/sandipb-ai"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

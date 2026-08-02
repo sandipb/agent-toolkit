@@ -1,0 +1,7 @@
+{
+  "name": "sandipb-ai",
+  "version": "0.1.0",
+  "description": "Reusable technical-writing, observability, and service-operations skills.",
+  "author": {"name": "sandipb"},
+  "license": "Apache-2.0"
+}
