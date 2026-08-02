@@ -1,87 +1,72 @@
-# AI Coding Agent Skills Directory
+# sandipb.ai skills
 
-A public collection of reusable skills for AI coding agents (Claude Code, OpenCode, GitHub
-Copilot, Cursor, etc.).
+Reusable skills packaged as one plugin for Codex, ChatGPT Work, and Claude Code.
 
-**Note**: Skills were originally created for [Claude Code](https://github.com/anthropics/claude-code)
-but follow a generic format that can be adapted for other AI coding assistants.
+## Contents
 
-## What are Skills?
+- `grafana-loki`: Query and analyze Grafana Loki logs with LogQL.
+- `fireworks-billing`: Export and summarize Fireworks AI billing usage metrics.
+- `edit-technical-docs`: Edit, rewrite, restructure, or review existing technical documentation while preserving its
+  technical meaning. This skill is manual-only; `avoid-ai-writing` is an optional final pass.
 
-Skills are specialized capability packages that enhance AI coding agents with domain-specific
-knowledge and tools. Each skill includes:
-- Trigger conditions (keywords, commands)
-- Allowed tools and permissions
-- Expert instructions and reference material
-- Helper scripts and utilities
+## Install in Codex or ChatGPT Work
 
-## Available Skills
-
-### grafana-loki
-
-Query and analyze logs using Grafana Loki.
-
-**Capabilities:**
-- Write and execute LogQL queries
-- Query via `logcli`, HTTP API, or helper script
-- Optimize queries for performance
-- Analyze label cardinality and data volume
-- Investigate errors and patterns in logs
-
-**Triggers:** `/grafana-loki`, "loki", "logql", "logcli", "log query"
-
-**Installation (Claude Code):**
 ```bash
-cp -r skills/grafana-loki ~/.claude/skills/
+codex plugin marketplace add sandipb/skills-directory
+codex plugin install sandipb-ai@sandipb-ai
 ```
 
-**Includes:**
-- Complete LogQL syntax reference
-- Loki HTTP API documentation
-- Query optimization guide
-- logcli command reference
-- Bash wrapper script for API calls
+Restart the app and start a new chat after installation. Plugins are available in Codex and ChatGPT Work, not ordinary
+ChatGPT chat mode.
 
-## Installing Skills
+## Install in Claude Code
 
-### For Claude Code
-
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/sandipb/skills-directory.git
-   ```
-
-2. Copy desired skills to your Claude skills directory:
-   ```bash
-   cp -r skills-directory/skills/<skill-name> ~/.claude/skills/
-   ```
-
-3. Restart Claude Code or start a new session to load the skill.
-
-### For Other AI Coding Agents
-
-The SKILL.md format and structure can be adapted to your agent's configuration system. Check your
-agent's documentation for how to add custom capabilities or context.
-
-## Verifying Installation (Claude Code)
-
-In Claude Code, skills appear in the system reminder at the start of conversations:
-```
-The following skills are available for use with the Skill tool:
-- <skill-name>: <description>
+```bash
+claude plugin marketplace add sandipb/skills-directory
+claude plugin install sandipb-ai@sandipb-ai
 ```
 
-## Contributing
+Invoke technical editing explicitly with `$edit-technical-docs` in Codex, `@edit-technical-docs` in ChatGPT Work, or
+`/sandipb-ai:edit-technical-docs` in Claude Code. The other skills remain available for model invocation.
 
-Contributions welcome! When adding new skills:
-- Ensure no personally identifying information (PII)
-- Use placeholder domains and credentials in examples
-- Include comprehensive reference documentation
-- Test locally before submitting
-- Update this README with the new skill
+## Repository layout
 
-See [AGENTS.md](AGENTS.md) for detailed contributor guidelines.
+```text
+skills/                           Canonical skills; read and edit these
+plugins/codex/sandipb-ai/         Generated Codex package
+plugins/claude/sandipb-ai/        Generated Claude package
+.agents/plugins/marketplace.json  Codex marketplace
+.claude-plugin/marketplace.json   Claude marketplace
+AGENTS.md                         Canonical agent instructions
+CLAUDE.md                         Symlink to AGENTS.md
+```
+
+### Why skill content is duplicated
+
+The two plugin directories duplicate content from top-level `skills/`. Codex and Claude Code install self-contained
+package directories, but they require different layouts and invocation metadata. Committed host copies let both
+marketplaces install valid packages without relying on symlinks or paths outside the package boundary.
+
+Read the top-level `skills/` directories to inspect the skills. Contributors should edit only those canonical files.
+The plugin `skills/` directories are generated installation artifacts; CI rejects missing, stale, or manually changed
+copies.
+
+## Develop and validate
+
+Follow `AGENTS.md`. In particular:
+
+- edit only top-level canonical skills and regenerate host copies;
+- update skill changelogs when behavior changes;
+- validate changed skills and both plugin formats;
+- never include credentials or private data;
+- obtain approval before committing, pushing, or opening a pull request.
+
+Run `task validate` before requesting review. Changes merge only through pull requests after the required validation
+check passes. See [Owner setup](docs/owner-setup.md) for the GitHub UI configuration.
+
+For local installation testing, replace `sandipb/skills-directory` in the marketplace commands with the absolute path to
+your checkout.
 
 ## License
 
-Apache License 2.0 - see [LICENSE](LICENSE) file for details.
+Apache License 2.0. See `LICENSE`.

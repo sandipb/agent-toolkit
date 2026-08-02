@@ -1,0 +1,4 @@
+email,start_time,end_time,usage_type,accelerator_type,accelerator_seconds,base_model_name,model_bucket,parameter_count,prompt_tokens,completion_tokens
+user@example.com,2026-02-17 00:00:00 UTC,2026-02-17 00:00:01 UTC,TEXT_COMPLETION_INFERENCE_USAGE,,0,accounts/fireworks/models/llama,Llama,8,100,25
+user@example.com,2026-02-17 00:01:00 UTC,2026-02-17 00:01:01 UTC,TEXT_COMPLETION_INFERENCE_USAGE,,0,accounts/fireworks/models/llama,Llama,8,50,10
+user@example.com,2026-02-17 01:00:00 UTC,2026-02-17 01:30:00 UTC,ON_DEMAND_DEPLOYMENT_USAGE,A100,1800,accounts/fireworks/models/custom,,8,,
