@@ -1,4 +1,4 @@
-# sandipb.ai skills
+# Agent Toolkit
 
 Reusable skills packaged as one plugin for Codex, ChatGPT Work, and Claude Code.
 
@@ -12,8 +12,8 @@ Reusable skills packaged as one plugin for Codex, ChatGPT Work, and Claude Code.
 ## Install in Codex or ChatGPT Work
 
 ```bash
-codex plugin marketplace add sandipb/skills-directory
-codex plugin install sandipb-ai@sandipb-ai
+codex plugin marketplace add sandipb/agent-toolkit
+codex plugin install sandipb-agents@sandipb-agents
 ```
 
 Restart the app and start a new chat after installation. Plugins are available in Codex and ChatGPT Work, not ordinary
@@ -22,19 +22,19 @@ ChatGPT chat mode.
 ## Install in Claude Code
 
 ```bash
-claude plugin marketplace add sandipb/skills-directory
-claude plugin install sandipb-ai@sandipb-ai
+claude plugin marketplace add sandipb/agent-toolkit
+claude plugin install sandipb-agents@sandipb-agents
 ```
 
 Invoke technical editing explicitly with `$edit-technical-docs` in Codex, `@edit-technical-docs` in ChatGPT Work, or
-`/sandipb-ai:edit-technical-docs` in Claude Code. The other skills remain available for model invocation.
+`/sandipb-agents:edit-technical-docs` in Claude Code. The other skills remain available for model invocation.
 
 ## Repository layout
 
 ```text
 skills/                           Canonical skills; read and edit these
-plugins/codex/sandipb-ai/         Generated Codex package
-plugins/claude/sandipb-ai/        Generated Claude package
+plugins/codex/sandipb-agents/     Generated Codex package
+plugins/claude/sandipb-agents/    Generated Claude package
 .agents/plugins/marketplace.json  Codex marketplace
 .claude-plugin/marketplace.json   Claude marketplace
 AGENTS.md                         Canonical agent instructions
@@ -64,7 +64,7 @@ Follow `AGENTS.md`. In particular:
 Run `task validate` before requesting review. Changes merge only through pull requests after the required validation
 check passes. See [Owner setup](docs/owner-setup.md) for the GitHub UI configuration.
 
-For local installation testing, replace `sandipb/skills-directory` in the marketplace commands with the absolute path to
+For local installation testing, replace `sandipb/agent-toolkit` in the marketplace commands with the absolute path to
 your checkout.
 
 ## License

@@ -10,8 +10,8 @@ import yaml
 
 
 REPO = Path(__file__).resolve().parents[1]
-CODEX_ROOT = REPO / "plugins/codex/sandipb-ai"
-CLAUDE_ROOT = REPO / "plugins/claude/sandipb-ai"
+CODEX_ROOT = REPO / "plugins/codex/sandipb-agents"
+CLAUDE_ROOT = REPO / "plugins/claude/sandipb-agents"
 
 
 def load_json(path: Path) -> dict:
@@ -34,11 +34,11 @@ for field in ("name", "version", "description", "license"):
 
 if codex_market["plugins"][0]["name"] != codex["name"]:
     raise SystemExit("Codex marketplace and manifest names disagree")
-if codex_market["plugins"][0]["source"]["path"] != "./plugins/codex/sandipb-ai":
+if codex_market["plugins"][0]["source"]["path"] != "./plugins/codex/sandipb-agents":
     raise SystemExit("Codex marketplace source path is incorrect")
 if claude_market["plugins"][0]["name"] != claude["name"]:
     raise SystemExit("Claude marketplace and manifest names disagree")
-if claude_market["plugins"][0]["source"] != "./plugins/claude/sandipb-ai":
+if claude_market["plugins"][0]["source"] != "./plugins/claude/sandipb-agents":
     raise SystemExit("Claude marketplace source path is incorrect")
 
 canonical_edit = frontmatter(REPO / "skills/edit-technical-docs/SKILL.md")

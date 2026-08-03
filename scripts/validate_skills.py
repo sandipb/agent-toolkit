@@ -14,7 +14,7 @@ REPO = Path(__file__).resolve().parents[1]
 VALIDATOR = Path.home() / ".codex/skills/.system/skill-creator/scripts/quick_validate.py"
 ROOTS = (
     REPO / "skills",
-    REPO / "plugins/codex/sandipb-ai/skills",
+    REPO / "plugins/codex/sandipb-agents/skills",
 )
 
 

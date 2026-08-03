@@ -15,8 +15,8 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 SOURCE = REPO / "skills"
 TARGETS = {
-    "codex": REPO / "plugins/codex/sandipb-ai/skills",
-    "claude": REPO / "plugins/claude/sandipb-ai/skills",
+    "codex": REPO / "plugins/codex/sandipb-agents/skills",
+    "claude": REPO / "plugins/claude/sandipb-agents/skills",
 }
 MANUAL_SKILL = "edit-technical-docs"
 CLAUDE_MANUAL_FIELD = "disable-model-invocation: true"

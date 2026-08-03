@@ -1,14 +1,14 @@
 {
-  "name": "sandipb-ai",
+  "name": "sandipb-agents",
   "interface": {
-    "displayName": "sandipb.ai"
+    "displayName": "sandipb agents"
   },
   "plugins": [
     {
-      "name": "sandipb-ai",
+      "name": "sandipb-agents",
       "source": {
         "source": "local",
-        "path": "./plugins/codex/sandipb-ai"
+        "path": "./plugins/codex/sandipb-agents"
       },
       "policy": {
         "installation": "AVAILABLE",
