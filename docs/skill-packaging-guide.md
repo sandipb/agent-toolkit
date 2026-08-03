@@ -15,8 +15,8 @@ creates committed, host-specific plugin packages.
 │       ├── references/             # optional disclosed detail
 │       └── scripts/                # optional deterministic helpers
 ├── plugins/
-│   ├── codex/sandipb-ai/            # generated skills plus Codex manifest
-│   └── claude/sandipb-ai/           # generated skills plus Claude manifest
+│   ├── codex/sandipb-agents/        # generated skills plus Codex manifest
+│   └── claude/sandipb-agents/       # generated skills plus Claude manifest
 ├── scripts/sync_plugin_skills.py
 ├── Taskfile.yml
 ├── .agents/plugins/marketplace.json
@@ -111,7 +111,7 @@ Claude copy:
 
 ```text
 skills/edit-technical-docs/SKILL.md
-plugins/claude/sandipb-ai/skills/edit-technical-docs/SKILL.md
+plugins/claude/sandipb-agents/skills/edit-technical-docs/SKILL.md
 ```
 
 The generated Claude file differs only by `disable-model-invocation: true` in its frontmatter. The

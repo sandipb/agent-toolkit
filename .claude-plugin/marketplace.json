@@ -1,13 +1,13 @@
 {
-  "name": "sandipb-ai",
-  "description": "Personal AI workflows and operational skills.",
+  "name": "sandipb-agents",
+  "description": "Reusable skills and workflows for AI agents.",
   "owner": {
     "name": "sandipb"
   },
   "plugins": [
     {
-      "name": "sandipb-ai",
-      "source": "./plugins/claude/sandipb-ai",
+      "name": "sandipb-agents",
+      "source": "./plugins/claude/sandipb-agents",
       "description": "Reusable technical-writing, observability, and service-operations skills."
     }
   ]

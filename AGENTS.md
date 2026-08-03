@@ -13,8 +13,8 @@ This repository publishes one plugin containing reusable agent skills for Codex,
 
 - `AGENTS.md` is canonical. `CLAUDE.md` must be a relative symlink to it.
 - Canonical skills live in the real top-level `skills/<skill-name>/` directories.
-- Generated Codex and Claude packages live under `plugins/codex/sandipb-ai/` and
-  `plugins/claude/sandipb-ai/`.
+- Generated Codex and Claude packages live under `plugins/codex/sandipb-agents/` and
+  `plugins/claude/sandipb-agents/`.
 - Codex and Claude marketplace metadata lives in `.agents/plugins/marketplace.json` and
   `.claude-plugin/marketplace.json`.
 

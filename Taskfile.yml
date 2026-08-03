@@ -29,5 +29,5 @@ tasks:
       - uv run --with pyyaml scripts/validate_codex_plugin.py
       - uv run --with pyyaml scripts/validate_package_metadata.py
       - claude plugin validate . --strict
-      - claude plugin validate plugins/claude/sandipb-ai --strict
+      - claude plugin validate plugins/claude/sandipb-agents --strict
       - uv run pre-commit run --all-files

@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 validator = Path.home() / ".codex/skills/.system/plugin-creator/scripts/validate_plugin.py"
-plugin = Path(__file__).resolve().parents[1] / "plugins/codex/sandipb-ai"
+plugin = Path(__file__).resolve().parents[1] / "plugins/codex/sandipb-agents"
 
 if validator.is_file():
     subprocess.run([sys.executable, str(validator), str(plugin)], check=True)
