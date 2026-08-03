@@ -13,7 +13,7 @@ Reusable skills packaged as one plugin for Codex, ChatGPT Work, and Claude Code.
 
 ```bash
 codex plugin marketplace add sandipb/agent-toolkit
-codex plugin install sandipb-agents@sandipb-agents
+codex plugin add sandipb-agents@sandipb-agents
 ```
 
 Restart the app and start a new chat after installation. Plugins are available in Codex and ChatGPT Work, not ordinary
