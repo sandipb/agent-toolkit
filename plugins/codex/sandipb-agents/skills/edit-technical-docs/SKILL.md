@@ -39,17 +39,30 @@ Never make a lower rule override a higher rule.
 Read the full section in scope before editing it. Before rewriting, identify each claim and each explicit relationship
 between claims. Make the smallest changes that satisfy the request.
 
+Use these measurable defaults as review thresholds, not compliance limits:
+
+- At most 20 words in a procedural or warning sentence.
+- At most 25 words in a descriptive sentence.
+- At most six sentences in a paragraph.
+
+Exceed a threshold when a shorter version would make a condition, cause, exception, requirement, or atomic operation
+implicit. Preserve text that cannot be split safely and report the length concern.
+
 - Use one term consistently when the source makes two terms' equivalence certain. Otherwise, preserve the terms and
   flag the inconsistency.
+- Repeat established technical terms instead of introducing synonyms. Preserve API fields, commands, identifiers,
+  product names, protocol terms, UI strings, and normative keywords.
+- Use the same sentence pattern for recurring operations when their context and meaning are the same.
 - Prefer active voice when identifying the actor improves clarity.
 - State prerequisites and conditions explicitly when the source contains them.
 - Replace `it`, `this`, `that`, and similar pronouns only when the source names one certain referent. If two or more
   referents are possible, preserve the ambiguous clause unchanged and flag it.
-- Keep procedural sentences short enough to contain one action.
-- Put one action in each procedural step.
+- Put one instruction in each procedural sentence and step. Keep simultaneous actions or one atomic operation together.
 - Separate commands, expected results, and explanations.
+- Keep an immediate result, success criterion, or limit with its related action.
+- Put a required condition before its command.
 - Do not assign a command to an action or purpose unless the source explicitly makes that association.
-- Use direct instructions in procedures.
+- Write reader actions in the imperative.
 - Keep technical language when simpler language would reduce precision.
 - Preserve the source's use and capitalization of normative terms.
 - Preserve certainty, degree, and stated importance. Do not turn `required`, `critical`, `important`, or equivalent
@@ -61,6 +74,30 @@ between claims. Make the smallest changes that satisfy the request.
 
 Do not impose ASD-STE100 vocabulary or claim ASD-STE100 compliance. Use only the controlled-language principles stated
 in this skill.
+
+## Control information density
+
+Use one topic in each descriptive sentence and paragraph. Group related information and introduce it from context to
+detail. Prefer a topic sentence at the start of a descriptive paragraph. Convert a complex series to a vertical list
+when each item can retain its relationships, conditions, and scope.
+
+Simplify a long noun stack or nominalization only when the actor, action, and modifier relationships remain certain.
+Restore an omitted article or sentence part only when its meaning is certain. Preserve and report any uncertain case.
+
+Report:
+
+- A pronoun with more than one possible referent.
+- `with` when it can express more than one technical relationship.
+- A hidden or uncertain actor.
+- A long noun stack with unclear modifier relationships.
+- A nominalization that hides an uncertain actor or action.
+- An omitted sentence part whose meaning is uncertain.
+- A phrasal verb whose meaning is unclear in context.
+- Essential information hidden in parentheses.
+
+Preserve established software phrasal verbs and technical nouns. Remove idioms, slang, and regional expressions only
+when a technically equivalent replacement is certain. Preserve the project's spelling conventions. Judge contractions
+and passive voice in context instead of banning them.
 
 ## Preserve information
 
@@ -103,6 +140,19 @@ way that makes an explicit technical relationship implicit.
 
 For runbooks and procedures, distinguish applicable prerequisites, conditions, risks, commands, expected results,
 verification, rollback, escalation, and stop conditions. Flag missing elements. Do not invent them or validate commands.
+
+Keep procedures executable without notes, tips, or asides. Flag any note that contains a required action, limit, result,
+prerequisite, stop condition, or risk. Move that content only when the source makes its correct destination certain.
+
+When the source provides safety content, structure it as:
+
+1. The project's approved risk label.
+2. The preventive action or required condition.
+3. The consequence.
+
+Preserve the project's warning taxonomy. Never invent a risk classification, mitigation, or consequence. Report a
+missing or uncertain element instead. Clearly identify destructive actions and irreversible effects when the source
+does so. Preserve concrete cost and resource risks when the source provides them.
 
 ## Run available prose checks
 
