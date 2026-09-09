@@ -29,8 +29,11 @@ Use a new fresh writer/editor subagent for each revision. Do not use same-contex
 editorial work.
 
 When `avoid-ai-writing` is available, optionally send only the current edited draft to a sibling reviewer for structured
-critique, not rewriting. Deduplicate its findings, reject only objective conflicts with the shared invariants, and send
-substantive findings to a new editor for reconciliation. Skip this specialist pass when unnecessary. Its absence never
+critique, not rewriting. Require each finding to identify a concrete problem with clarity, coherence, or readability.
+Vocabulary, sentence length, punctuation, and conversational tone are not independent acceptance criteria. Preserve
+supported author voice and purposeful narrative pacing. Deduplicate findings. Reject findings that conflict with the
+shared invariants or lack a concrete reader benefit. Send substantive remaining findings to a fresh editor for
+reconciliation. Skip this specialist pass when unnecessary. Its absence never
 blocks the core workflow.
 
 If isolated delegation is unavailable or disabled, stop before composing, editing, or reviewing. Return a concise

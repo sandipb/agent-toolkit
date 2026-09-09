@@ -41,9 +41,11 @@ editorial work.
 
 When `avoid-ai-writing` is available, send only the current edited draft to a sibling reviewer. Ask it to critique, not
 rewrite, and return location, pattern, severity, `safe-fix` or `author-judgment`, rationale, and suggested direction.
-Deduplicate findings and reject only objective conflicts with the shared invariants. Send substantive findings to a new
-editor for reconciliation. Skip this optional specialist pass when unnecessary. Its absence never blocks the core
-workflow.
+Require each finding to identify a concrete problem with clarity, coherence, or readability. Vocabulary, sentence
+length, punctuation, and conversational tone are not independent acceptance criteria. Deduplicate findings. Reject
+findings that conflict with the shared invariants or lack a concrete reader benefit. Send substantive remaining
+findings to a fresh editor for reconciliation. Skip this optional specialist pass when unnecessary. Its absence never
+blocks the core workflow.
 
 If isolated delegation is unavailable or disabled, stop before composing, editing, or reviewing. Return a concise
 capability error naming isolated writer/editor delegation as missing and telling the user how to enable subagents. For
