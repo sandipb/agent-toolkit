@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0 - 2026-09-09
+
+- Limit optional specialist findings to concrete clarity, coherence, or readability problems.
+- Reject findings that conflict with shared invariants or lack a concrete reader benefit.
+
 ## 1.1.0 - 2026-08-15
 
 - Require a fresh, isolated editor for every task, with no same-context fallback.
