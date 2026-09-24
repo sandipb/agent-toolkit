@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.0 - 2026-09-23
+
+- Let the main thread choose direct work, editor reuse, or new delegation based on the task.
+- Require a fresh reviewer only when a review is presented as independent.
+- Limit delegated reviews to language, return findings without an unsolicited rewrite, and avoid mechanical sentence limits.
+- Keep technical verification out of writing-review handoffs, including mixed requests.
+
 ## 1.2.0 - 2026-09-09
 
 - Limit optional specialist findings to concrete clarity, coherence, or readability problems.

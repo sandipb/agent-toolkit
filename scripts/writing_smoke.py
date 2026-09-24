@@ -130,8 +130,6 @@ def validate_fixture(data: object, source: Path) -> Fixture:
     requires_isolated_editor = data.get("requires_isolated_editor")
     if not isinstance(requires_isolated_editor, bool):
         raise HarnessError(f"{source}: requires_isolated_editor must be a boolean")
-    if {"technical-docs", "tech-blog"} & set(expected_skills) and not requires_isolated_editor:
-        raise HarnessError(f"{source}: umbrella writing skills require requires_isolated_editor: true")
     assertions = data.get("assertions")
     if not isinstance(assertions, dict) or set(assertions) - {"contains", "forbids", "sections"}:
         raise HarnessError(f"{source}: assertions supports only contains, forbids, and sections")

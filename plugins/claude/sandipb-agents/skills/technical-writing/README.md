@@ -9,5 +9,6 @@ Examples:
 - `$technical-writing Tighten this deployment note without changing its requirements.`
 - `Rewrite this issue summary using only the supplied findings.`
 
-The skill uses existing or supplied context. It does not research missing facts, and it returns material gaps instead
-of inventing them.
+The skill uses supplied context to improve language and preserve meaning. It does not verify facts, inspect code, or
+research missing information. If asked to do so, it names the checks it did not perform and returns them to the main
+agent. Follow-up review focuses on passages changed in ways that create a concrete language concern.
