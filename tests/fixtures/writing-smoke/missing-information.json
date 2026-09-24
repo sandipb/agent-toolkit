@@ -3,7 +3,7 @@
   "id": "missing-information",
   "prompt": "Compose a partial fictional deployment procedure only from these notes. Return sections named `Draft` and `Questions`. Do not invent the missing deployment command.\n\nService: `orbit-api`. Required health endpoint: `/ready`. Deployment command: not supplied.",
   "expected_skills": ["technical-docs", "technical-writing"],
-  "requires_isolated_editor": true,
+  "requires_isolated_editor": false,
   "assertions": {
     "contains": ["orbit-api", "/ready"],
     "forbids": ["kubectl", "docker", "helm"],

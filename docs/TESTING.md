@@ -80,8 +80,7 @@ Version 2 fixtures are JSON files under `tests/fixtures/writing-smoke/`. Each fi
 - `id`: a unique lowercase kebab-case identifier;
 - `prompt`: complete fictional input passed to Codex unchanged;
 - `expected_skills`: informational routing metadata;
-- `requires_isolated_editor`: required in every fixture; must be `true` when `expected_skills` includes
-  `technical-docs` or `tech-blog`;
+- `requires_isolated_editor`: required in every fixture; set to `true` when the prompt asks for an independent review;
 - `assertions.contains`: required exact literals;
 - `assertions.forbids`: prohibited exact literals;
 - `assertions.sections`: required Markdown heading or standalone section labels;
@@ -91,9 +90,9 @@ At least one deterministic assertion is required. Unknown fields and malformed f
 a sandbox or makes a model request. Do not add private operational data, customer data, unpublished measurements, or
 exact full-response snapshots.
 
-To migrate a version 1 fixture, set `schema_version` to `2`, add `requires_isolated_editor: true` for `technical-docs`
-and `tech-blog` fixtures or `false` otherwise, and ensure each required-editor fixture has at least one source literal
-in `assertions.contains`.
+To migrate a version 1 fixture, set `schema_version` to `2`, set `requires_isolated_editor` according to whether the
+prompt asks for an independent review, and ensure each required-editor fixture has at least one source literal in
+`assertions.contains`.
 
 ## Results and cleanup
 
@@ -185,6 +184,7 @@ Fixtures use small fictional inputs with independently checkable literals. They 
 - examples, analogies, material removal, changed emphasis, and major restructuring returned as author-judgment items;
 - documentation preserving distinct information while blog editing permits stronger selection and reordering;
 - review-only requests returning findings without a rewrite;
+- mixed language and technical-review requests, including disclosure of a technical check not performed;
 - formulaic prose reduction without synonym-cycling technical terms;
 - omission of empty findings or suggestions sections.
 

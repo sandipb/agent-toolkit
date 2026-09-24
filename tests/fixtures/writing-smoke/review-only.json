@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "id": "review-only",
-  "prompt": "Review, but do not rewrite, this fictional procedure. Return a section named `Findings`. Do not include a section named `Revised content`.\n\nRun `nova purge --all`. It removes the fictional cache. Then check it.",
+  "prompt": "Use a fresh reviewer for an independent assessment of this fictional procedure; do not rewrite it. Return a section named `Findings`. Do not include a section named `Revised content`.\n\nRun `nova purge --all`. It removes the fictional cache. Then check it.",
   "expected_skills": ["technical-docs", "technical-writing"],
   "requires_isolated_editor": true,
   "assertions": {

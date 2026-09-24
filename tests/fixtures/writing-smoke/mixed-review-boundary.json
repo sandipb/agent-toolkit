@@ -1,0 +1,15 @@
+{
+  "schema_version": 2,
+  "id": "mixed-review-boundary",
+  "prompt": "$technical-docs Review this fictional runbook excerpt for language clarity without rewriting it, and verify from the implementation whether `arcctl promote --wait` waits for `/ready`. Return a section named `Findings`. Only the excerpt is supplied.\n\n`arcctl promote --wait` it promotes the service. Check `/ready` after it finishes.",
+  "expected_skills": ["technical-docs", "technical-writing"],
+  "requires_isolated_editor": false,
+  "assertions": {
+    "contains": ["arcctl promote --wait", "not performed"],
+    "forbids": ["Revised content", "## Revised content"],
+    "sections": ["Findings"]
+  },
+  "manual_review": [
+    "Confirm the response gives a language finding, names the implementation check as unperformed, and leaves it to the main agent without claiming a technical result."
+  ]
+}

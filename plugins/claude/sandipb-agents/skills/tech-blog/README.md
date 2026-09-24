@@ -4,18 +4,21 @@
 `technical-docs` but allows stronger changes to structure, pacing, explanation, and information selection.
 
 Use an existing rough draft or research already gathered by the main agent. The skill does not research independently.
-It preserves support for technical claims and returns proposed examples, analogies, major restructuring, material
-removals, changed emphasis, and missing context as suggestions rather than silently inventing or deciding them.
+It preserves support for technical claims. Reordering and restructuring may be applied when claims and emphasis remain
+intact; proposed examples, analogies, material removals, changed emphasis, and missing context remain suggestions.
 
 Examples:
 
-- `$tech-blog Turn this rough draft into a tighter article; list major structural suggestions separately.`
+- `$tech-blog Turn this rough draft into a tighter article while preserving its claims and emphasis.`
 - `Write a technical article from these researched notes and flag unsupported gaps.`
 - `Review this post for pacing and formulaic AI-writing patterns without rewriting it.`
 
-Every compose, edit, or review must use an isolated fresh writer/editor subagent, including small drafts. The main agent
-selects sources, records decisions, maintains the authoritative draft, prepares the bounded source packet, coordinates
-the work, and renders the result. Each revision uses a new editor with no unrelated inherited context. If isolated
-delegation is unavailable, the skill stops before editorial work and explains how to enable subagents; Pi requires its
-official subagent extension. An optional `avoid-ai-writing` reviewer may critique the current draft, but its absence
-never blocks writing.
+The main agent selects sources, records decisions, maintains the authoritative draft, and renders the result. It may
+work directly, reuse an editor, or start a new one according to the task and context cost. A review presented as
+independent uses a fresh reviewer; a reused editor's review carries its earlier context. An optional `avoid-ai-writing`
+reviewer may critique the current draft, but its absence never blocks writing.
+Reviewers assess language against supplied material; they do not fact-check, inspect code, or test technical behavior.
+When a request needs both kinds of review, the main agent handles technical verification separately and delegates only
+the language review.
+Review-only requests return findings without a rewritten draft. Further review focuses on changed passages only when a
+concrete language concern remains.

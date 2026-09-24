@@ -84,14 +84,15 @@ class FixtureTests(unittest.TestCase):
                 "comparison-blog-contract",
                 "local-convention-precedence",
                 "multiple-missing-facts",
+                "mixed-review-boundary",
             }.issubset(identifiers)
         )
 
-    def test_umbrella_fixtures_require_an_isolated_editor(self):
+    def test_only_independent_review_fixtures_require_an_isolated_editor(self):
         fixtures = writing_smoke.load_fixtures(Path("tests/fixtures/writing-smoke"))
         for fixture in fixtures:
             with self.subTest(fixture=fixture.identifier):
-                expected = bool({"technical-docs", "tech-blog"} & set(fixture.expected_skills))
+                expected = fixture.identifier in {"review-only", "blog-review-only"}
                 self.assertEqual(expected, fixture.requires_isolated_editor)
 
     def test_each_umbrella_skill_has_explicit_and_implicit_fixtures(self):
@@ -120,31 +121,24 @@ class ReadmeContractTests(unittest.TestCase):
         for phrase in ("rough draft", "researched notes", "without rewriting"):
             self.assertIn(phrase, blog)
 
-    def test_readmes_document_source_and_isolation_boundaries(self):
+    def test_readmes_document_source_and_independent_review_boundaries(self):
         for skill in ("technical-writing", "technical-docs", "tech-blog"):
             with self.subTest(skill=skill):
                 text = self.readme(skill)
                 self.assertRegex(text, r"supplied|already gathered|existing")
-                self.assertRegex(text, r"does not research|writes only from")
+                self.assertRegex(text, r"does not (?:verify|research)|writes only from")
         for skill in ("technical-docs", "tech-blog"):
             text = self.readme(skill)
-            self.assertRegex(text, r"fresh (?:writer/)?editor subagent")
-            self.assertIn("must", text.lower())
-            self.assertIn("stop", text.lower())
-            self.assertNotIn("sequentially with weaker context isolation", text)
+            self.assertIn("reuse an editor", text)
+            self.assertIn("independent uses a fresh reviewer", text)
             self.assertIn("avoid-ai-writing", text)
 
-    def test_umbrella_skills_require_delegation_and_reject_same_context_fallback(self):
+    def test_umbrella_skills_allow_editor_reuse_and_require_independent_review(self):
         for skill in ("technical-docs", "tech-blog"):
             with self.subTest(skill=skill):
                 text = Path(f"skills/{skill}/SKILL.md").read_text(encoding="utf-8")
-                self.assertRegex(text, r"(?i)must delegate every compose, edit, or review")
-                self.assertRegex(text, r"(?i)fresh writer/editor subagent")
-                self.assertRegex(text, r"(?i)stop before (?:composing|editing|reviewing)")
-                self.assertIn("Do not use same-context or sequential fallback", text)
-                self.assertNotIn("Without subagents", text)
-                self.assertIn("If isolated delegation is unavailable or disabled", text)
-                self.assertIn("official subagent extension must be installed and enabled", text)
+                self.assertIn("reuse an existing editor", text)
+                self.assertIn("Use a fresh reviewer when presenting a review as independent", text)
 
 
 class StreamTests(unittest.TestCase):
