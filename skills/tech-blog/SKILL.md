@@ -31,13 +31,19 @@ of a new subagent's packet.
 Use a fresh reviewer when presenting a review as independent. A reused editor retains earlier context, so describe its
 review accordingly.
 
-Use the optional `avoid-ai-writing` pass only when requested or when a concrete unresolved language pattern warrants
-it. Send only the current edited draft to a sibling reviewer for structured critique, not rewriting. Require each
-finding to identify a concrete problem with clarity, coherence, or readability.
+For substantive prose—more than a few sentences, such as a multi-paragraph article—run `avoid-ai-writing` in
+detect-only mode on the current draft before returning composition or edits, and as part of review-only work. Run it
+even when the main thread sees no obvious pattern. Use a sibling reviewer when available; otherwise run the pass in
+the main thread. For
+short text, run it when requested or when a concrete language pattern warrants it. Ask for structured critique, not
+rewriting. Require each finding to identify a concrete problem with clarity, coherence, or readability.
 Vocabulary, sentence length, punctuation, and conversational tone are not independent acceptance criteria. Preserve
-supported author voice and purposeful narrative pacing. Deduplicate findings. Reject findings that conflict with the
-shared invariants or lack a concrete reader benefit. Send substantive remaining findings to an editor for
-reconciliation or handle them in the main thread. Its absence never blocks the core workflow.
+supported author voice and purposeful narrative pacing. Deduplicate findings. Fix specific filler, formulaic phrasing,
+ornamental wording that adds no information or purposeful emphasis, awkward rhythm, or unclear passages when the change
+preserves technical meaning and voice. Reject mechanical-only flags and changes that conflict with the shared
+invariants. Send remaining findings to an editor for reconciliation
+or handle them in the main thread. If the skill is unavailable, report that the pass was not run and continue the core
+workflow. Repeat the pass only after material revisions introduce new prose.
 
 For composition or editing, return the draft and only material suggestions or missing-context questions. The main
 thread adopts delegated results as appropriate and renders them for the user.
