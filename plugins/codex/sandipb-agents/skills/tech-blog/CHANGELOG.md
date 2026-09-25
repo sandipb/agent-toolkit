@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.2 - 2026-09-25
+
+- Align the description with restructuring permissions and preserve review-only mode throughout editorial checks.
+- Specify delegation context, independent-review constraints, and the shared critique format.
+
 ## 1.3.1 - 2026-09-25
 
 - Require the `avoid-ai-writing` detect pass for substantive prose, including review-only work; report when unavailable.
