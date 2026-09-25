@@ -15,8 +15,10 @@ Examples:
 
 The main agent selects sources, records decisions, maintains the authoritative draft, and renders the result. It may
 work directly, reuse an editor, or start a new one according to the task and context cost. A review presented as
-independent uses a fresh reviewer; a reused editor's review carries its earlier context. An optional `avoid-ai-writing`
-reviewer may critique the current draft, but its absence never blocks writing.
+independent uses a fresh reviewer; a reused editor's review carries its earlier context. For substantive prose, the
+main agent runs `avoid-ai-writing` in detect-only mode even when it sees no obvious pattern. For short text, the pass
+runs when requested or warranted by a concrete pattern. If unavailable, the main agent reports that it was not run
+and continues writing.
 Reviewers assess language against supplied material; they do not fact-check, inspect code, or test technical behavior.
 When a request needs both kinds of review, the main agent handles technical verification separately and delegates only
 the language review.

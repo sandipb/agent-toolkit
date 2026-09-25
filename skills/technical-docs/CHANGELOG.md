@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1 - 2026-09-25
+
+- Require the `avoid-ai-writing` detect pass for substantive prose, including review-only work; report when unavailable.
+
 ## 1.3.0 - 2026-09-23
 
 - Let the main thread choose direct work, editor reuse, or new delegation based on the task.
